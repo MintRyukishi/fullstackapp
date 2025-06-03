@@ -17,7 +17,7 @@ def create_contact():
     email = request.json.get("email")
 
     if not first_name or not last_name or not email:
-        return (jsonify({"message": "You must include first name, last name, and email"}), 400,)
+        return jsonify({"message": "You must include first name, last name, and email"}), 400
 
     new_contact = Contact(first_name=first_name,
                           last_name=last_name, email=email)
@@ -47,7 +47,8 @@ def update_contact(user_id):
     return jsonify({"message": "User is updated"}), 200
 
 
-@app.route("/delete_contact/<int: user_id>", methods=["DELETE"])
+# Fixed: removed space
+@app.route("/delete_contact/<int:user_id>", methods=["DELETE"])
 def delete_contact(user_id):
     contact = Contact.query.get(user_id)
 
@@ -57,7 +58,8 @@ def delete_contact(user_id):
     db.session.delete(contact)
     db.session.commit()
 
-    return jsonify({"message": "Usewr is deleted succesfully"}), 200
+    # Fixed: typo
+    return jsonify({"message": "User is deleted successfully"}), 200
 
 
 if __name__ == "__main__":
